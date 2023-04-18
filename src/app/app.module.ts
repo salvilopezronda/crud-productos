@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     RouterModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

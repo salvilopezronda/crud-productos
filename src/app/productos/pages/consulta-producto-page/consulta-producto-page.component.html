@@ -1,3 +1,30 @@
-<div >
+
+<div class="formulario-container">
+    
+    <form [formGroup]="formulario" (ngSubmit)="crearProducto()">
+        <h2>Crear Producto</h2>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" formControlName="nombre">
+    
+      <label for="descripcion">Descripción:</label>
+      <input type="email" id="descripcion" formControlName="descripcion">
+    
+      <label for="precio">Precio:</label>
+      <input type="number" id="precio" formControlName="precio">
+    
+      <button type="submit" [disabled]="formulario.invalid">Crear Producto</button>
+    </form> 
+  </div>
+  <h2>Listado de Productos</h2>
+<div class="listaContenedor">
+    <ul>
+        <li *ngFor="let producto of listaProductos" class="producto">
+          <h3>{{ producto.nombre }}</h3>
+          <p>{{ producto.descripcion }}</p>
+          <p>Precio: ${{ producto.precio }}</p>
+          <button (click)="eliminarProducto(producto.id)">Eliminar</button>  
+          <button (click)="modificarProducto()">Modificar</button>
+        </li>
+      </ul>    
 
 </div>

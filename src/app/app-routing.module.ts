@@ -5,6 +5,11 @@ import { ConsultaProductoPageComponent } from './productos/pages/consulta-produc
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'usuarios'
+  },
+  {
+    path: 'usuarios',
     component: ConsultaProductoPageComponent
   },
   {
