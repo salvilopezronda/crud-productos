@@ -14,7 +14,7 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
 
   public listaProductos: Array<Producto> = new Array<Producto>();
   public suscripciones: Subscription = new Subscription();
-  public modoEditar:false;
+  public modoEditar:boolean=false;
   formulario: FormGroup
   constructor(
     private service: ProductosService,
@@ -22,9 +22,10 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
   ) {
     this.formulario = this.fb.group({
+      id: [null],
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
-      precio: ['', Validators.required],
+      precio: [null, Validators.required],
     });
   }
 
@@ -51,7 +52,22 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     );
     this.suscripciones.add(sub)
   }
+  public cancelar(){
+    this.formulario.get('id').setValue(null);
+    this.formulario.get('nombre').setValue('');
+    this.formulario.get('descripcion').setValue('');
+    this.formulario.get('precio').setValue(null);
+    this.modoEditar=false;
+  }
+  public cargarProductoParaModificar(producto:Producto){
+    this.formulario.get('id').setValue(producto.id);
+    this.formulario.get('nombre').setValue(producto.nombre);
+    this.formulario.get('descripcion').setValue(producto.descripcion);
+    this.formulario.get('precio').setValue(producto.precio);
+    this.modoEditar=true;
+  }
   public modificarProducto() {
+    console.log(this.formulario)
     /*const sub = this.service.obtenerTodos().subscribe(
       (resultado) => {
         this.listaProductos = resultado;
