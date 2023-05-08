@@ -16,6 +16,11 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
   public listaProductos: Array<Producto> = new Array<Producto>();
   public suscripciones: Subscription = new Subscription();
   public modoEditar:boolean=false;
+  public modoPaginado:boolean=false;
+  public size:number;
+  public page:number;
+  public sort:string;
+  public elementosTotales:number;
   formulario: FormGroup
   constructor(
     private service: ProductosService,
@@ -83,12 +88,18 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
   }
 
   public obtenerTodosFiltrando() {
+    this.modoPaginado=true;
     const search:RequestSearch = new RequestSearch();
     search.page=0;
     search.size=100;
     search.sort='nombre'
+    search.nombre='a'
     const sub = this.service.obtenerTodosFiltrando(search).subscribe(
       (resultado) => {
+        this.page=search.page;
+        this.size=search.size;
+        this.sort=search.sort;
+        this.elementosTotales=resultado.totalElements;
         this.listaProductos = resultado.content;
       },
       (error) => {
