@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ProductosService } from '../../service/productos.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RequestSearch } from '../../models/request-search.model';
 
 @Component({
   selector: 'app-consulta-producto-page',
@@ -36,7 +37,8 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     console.log(this.formulario.value);
   }
   ngOnInit(): void {
-    this.obtenerTodos();
+ //   this.obtenerTodos();
+ this.obtenerTodosFiltrando();
   }
 
   public eliminarProducto(id:number) {
@@ -66,9 +68,9 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     this.formulario.get('precio').setValue(producto.precio);
     this.modoEditar=true;
   }
-  public modificarProducto() {
-    console.log(this.formulario)
-    /*const sub = this.service.obtenerTodos().subscribe(
+
+  public obtenerTodos() {
+    const sub = this.service.obtenerTodos().subscribe(
       (resultado) => {
         this.listaProductos = resultado;
       },
@@ -77,13 +79,17 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
         alert("CODE - " + error.status + "/ Mensaje - " + error.message)
       }
     );
-    this.suscripciones.add(sub)*/
+    this.suscripciones.add(sub)
   }
 
-  public obtenerTodos() {
-    const sub = this.service.obtenerTodos().subscribe(
+  public obtenerTodosFiltrando() {
+    const search:RequestSearch = new RequestSearch();
+    search.page=0;
+    search.size=100;
+    search.sort='nombre'
+    const sub = this.service.obtenerTodosFiltrando(search).subscribe(
       (resultado) => {
-        this.listaProductos = resultado;
+        this.listaProductos = resultado.content;
       },
       (error) => {
         console.log(error)
