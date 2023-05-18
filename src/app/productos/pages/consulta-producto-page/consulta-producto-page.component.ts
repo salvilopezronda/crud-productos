@@ -70,7 +70,6 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     this.ngOnInit();
   }
   public cargarProductoParaModificar(producto: Producto) {
-    console.log(producto)
     if (this.modoEditar) {
       this.ficheroAdjunto=false;
       this.cancelar();
@@ -138,7 +137,6 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
   // SELECCIONAR Y ANEXAR ARCHIVO
   public fileNameChanged(ele, fichero, nombreFichero): void {
     const ficheros = ele.currentTarget.files;
-    console.log(ficheros)
     const numeroFicheros = ficheros.length;
     if (numeroFicheros > 0) {
       const reader: FileReader = new FileReader();
