@@ -16,8 +16,8 @@
     (mouseleave)="isHovered = false"
     >
       <td>{{ producto.nombre }}</td>
-      <td>{{ producto.nombre }}</td>
-      <td>{{ producto.nombre }}</td>
+      <td>{{ producto.descripcion }}</td>
+      <td>{{ producto.precio }} €</td>
       <button (click)="eliminarProducto(producto.id)" class="btn btn-danger">Eliminar</button>  
     </tr>
   </tbody>
