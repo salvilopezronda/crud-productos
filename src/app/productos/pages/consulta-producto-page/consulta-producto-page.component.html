@@ -91,7 +91,7 @@
                             *ngIf="this.ficheroAdjunto&&this.formulario.get('archivo').value==null"
                             type="button" 
                               class="btn btn-action" role="button"
-                              (click)="descargarFile(this.formulario.get('id').value, this.formulario.get('archivo').value, this.formulario.get('nombreArchivo').value);"
+                              (click)="descargarFile(this.formulario.get('id').value, this.formulario.get('nombreArchivo').value);"
                               title="Visualizar" style="margin-right: 3px;">
                               <span class="glyphicon glyphicon-eye-open"></span>
                             </button>

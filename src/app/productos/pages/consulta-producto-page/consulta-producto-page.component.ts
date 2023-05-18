@@ -162,10 +162,8 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
   // Descargar fichero anexado
   // Si se anexa un fichero será ese el que se descargue, de lo contrario si no se anexa ningún fichero y en
   // BBDD existe uno, será ese el que se descargue.
-  public descargarFile(id, archivo,nombreArchivo): void {
-    if (archivo != null && archivo != undefined && archivo !== '') {
-      this.service.descargarLocalFile(archivo,nombreArchivo);
-    }else if (nombreArchivo != null && nombreArchivo != undefined && nombreArchivo !== '') { 
+  public descargarFile(id,nombreArchivo): void {
+ if (nombreArchivo != null && nombreArchivo != undefined && nombreArchivo !== '') { 
       this.service.descargarFile(id);
     }else {
       console.log("Error al visualizar el archivo")

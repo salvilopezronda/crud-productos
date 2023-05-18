@@ -49,27 +49,5 @@ public descargarFile(id: any) {
   a.click();
   document.body.removeChild(a);
 }
- descargarLocalFile(archivo, nombreArchivo) {
-  return new Promise<void>((resolve, reject) => {
-    const a = document.createElement('a');
-    a.href = archivo;
-    a.download = nombreArchivo;
-    a.style.display = 'none';
-
-    a.addEventListener('click', () => {
-      document.body.removeChild(a);
-      resolve();
-    });
-
-    a.addEventListener('error', () => {
-      document.body.removeChild(a);
-      reject(new Error('No se pudo descargar el archivo.'));
-    });
-
-    document.body.appendChild(a);
-    a.click();
-  });
-}
-
 
 }
