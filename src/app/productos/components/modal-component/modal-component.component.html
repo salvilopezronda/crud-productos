@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h4 class="modal-title">Alerta</h4>
+    <button type="button" class="close" aria-label="Cerrar" (click)="dimissModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ mensaje }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="cerrarModal()">Aceptar</button>
+  </div>

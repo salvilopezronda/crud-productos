@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestSearch } from '../../models/request-search.model';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponentComponent } from '../../components/modal-component/modal-component.component';
+
 
 @Component({
   selector: 'app-consulta-producto-page',
@@ -32,6 +35,7 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     private service: ProductosService,
     private router: Router,
     private fb: FormBuilder,
+    private modalService: NgbModal
   ) {
     this.formulario = this.fb.group({
       id: [null],
@@ -49,7 +53,6 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     console.log(this.formulario.value);
   }
   ngOnInit(): void {
-    //   this.obtenerTodos();
     this.obtenerTodosFiltrando();
     
   }
@@ -60,8 +63,7 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
         this.obtenerTodos();
       },
       (error) => {
-        console.log(error)
-        alert("CODE - " + error.status + "/ Mensaje - " + error.message)
+        console.log("CODE - " + error.status + "/ Mensaje - " + error.message)
       }
     );
     this.suscripciones.add(sub)
@@ -99,8 +101,7 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
         this.listaProductos = resultado;
       },
       (error) => {
-        console.log(error)
-        alert("CODE - " + error.status + "/ Mensaje - " + error.message)
+        console.log("CODE - " + error.status + "/ Mensaje - " + error.message)
       }
     );
     this.suscripciones.add(sub)
@@ -121,8 +122,7 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
         this.listaProductos = resultado.content;
       },
       (error) => {
-        console.log(error)
-        alert("CODE - " + error.status + "/ Mensaje - " + error.message)
+        console.log("CODE - " + error.status + "/ Mensaje - " + error.message)
       }
     );
     this.suscripciones.add(sub)
@@ -154,15 +154,12 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     const splitReader = reader.result.toString().split('base64,');
     this.formulario.controls[fichero].setValue(splitReader[1]);
   }
-
   // Botones visualizar y eliminar solo visibles cuando hay un archivo anexo
-
-
-
   // Descargar fichero anexado
   // Si se anexa un fichero será ese el que se descargue, de lo contrario si no se anexa ningún fichero y en
   // BBDD existe uno, será ese el que se descargue.
   public descargarFile(id,nombreArchivo): void {
+    console.log(nombreArchivo)
  if (nombreArchivo != null && nombreArchivo != undefined && nombreArchivo !== '') { 
       this.service.descargarFile(id);
     }else {
@@ -182,10 +179,11 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     const productoParaModificar = new Producto(this.formulario.getRawValue());
     const sub = this.service.modificar(productoParaModificar).subscribe(
       () => {
-        console.log("Producto modificado correctamente ")
+
         this.modoEditar=false;
         this.cancelar();
         this.obtenerTodos();
+        console.log("Producto modificado correctamente")
       },
       ({ error, status }) => {
         console.log(error)
@@ -193,5 +191,9 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     );
     this.suscripciones.add(sub);
   }
+  /*mostrarAlerta(mensaje:string) {
+    const modalRef = this.modalService.open(ModalComponentComponent);
+      modalRef.componentInstance.mensaje = mensaje;
+  }*/
 
 }

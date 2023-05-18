@@ -7,11 +7,14 @@ import { ConsultaProductoPageComponent } from './productos/pages/consulta-produc
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ModalComponentComponent } from './productos/components/modal-component/modal-component.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConsultaProductoPageComponent
+    ConsultaProductoPageComponent,
+    ModalComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     RouterModule,
     CommonModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
