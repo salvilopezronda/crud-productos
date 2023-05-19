@@ -7,6 +7,7 @@
       <th  scope="col">Nombre</th>
       <th  scope="col">Descripción</th>
       <th  scope="col">Precio</th>
+      <th  scope="col">Fecha Alta</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,7 @@
       <td>{{ producto.nombre }}</td>
       <td>{{ producto.descripcion }}</td>
       <td>{{ producto.precio }} €</td>
+      <td>{{ producto.fechaAlta }}</td>
       <button (click)="eliminarProducto(producto.id)" class="btn btn-danger">Eliminar</button>  
     </tr>
   </tbody>

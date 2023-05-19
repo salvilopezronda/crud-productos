@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 export class Producto {
     id: number;
     nombre: string;
@@ -5,6 +6,7 @@ export class Producto {
     precio: number;
     nombreArchivo: string;
     archivo:any;
+    fechaAlta:string;
     constructor(data?) {
         this.id = data && data.id || null;
         this.nombre = data && data.nombre || null;
@@ -12,6 +14,7 @@ export class Producto {
         this.precio = data && data.precio || null;
         this.nombreArchivo = data && data.nombreArchivo || null;
         this.archivo = data && data.archivo || null;
+        this.fechaAlta = data && data.fechaAlta && data.fechaAlta !== '' ? moment(data.fecha, 'DD-MM-YYYY').format('DD/MM/YYYY') : null;
     }
     public toService() {
         const obj: any = new Object;
@@ -21,6 +24,7 @@ export class Producto {
         obj.precio = this.precio;
         obj.nombreArchivo = this.nombreArchivo;
         obj.archivo = this.archivo;
+        obj.fechaAlta = this.fechaAlta && moment(this.fechaAlta, 'DD-MM-YYYY').format('DD/MM/YYYY') || null;
         return obj;
     }
 }

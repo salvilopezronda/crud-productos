@@ -43,7 +43,8 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
       descripcion: ['', Validators.required],
       precio: [null, Validators.required],
       nombreArchivo: [null, Validators.required],
-      archivo: [null, Validators.required],
+      archivo: [null],
+      fechaAlta: [null],
     });
   }
 
@@ -53,8 +54,7 @@ export class ConsultaProductoPageComponent implements OnInit, OnDestroy {
     console.log(this.formulario.value);
   }
   ngOnInit(): void {
-    this.obtenerTodosFiltrando();
-    
+    this.obtenerTodos();
   }
 
   public eliminarProducto(id: number) {
